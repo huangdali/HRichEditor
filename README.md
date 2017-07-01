@@ -35,7 +35,7 @@ android端富文本编辑器
 
 ### 字体大小
 
-![这里写图片描述](https://github.com/huangdali/HRichEditor/blob/master/images/b.png)
+![这里写图片描述](https://github.com/huangdali/HRichEditor/blob/master/images/a.png)
 
 ### 居中、居左、居右
 
