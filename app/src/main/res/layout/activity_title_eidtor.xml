@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_ti_tle_eidtor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/mcc_public_title" />
+
+
+    <EditText
+        android:id="@+id/et_titleeditor_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fdfcfc"
+        android:gravity="start"
+        android:maxLength="40"
+        android:padding="5dp"
+        android:hint="不超过20个字"
+        android:textColorHint="#2000" />
+</LinearLayout>

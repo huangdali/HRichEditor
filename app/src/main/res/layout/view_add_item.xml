@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_additem_add"
+        style="@style/additem"
+        android:layout_gravity="center"
+        android:src="@mipmap/add" />
+
+    <LinearLayout
+        android:id="@+id/ll_additem_addarea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_change_bg"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_additem_txt"
+            style="@style/additem"
+            android:src="@mipmap/txt" />
+
+        <ImageView
+            android:id="@+id/iv_additem_img"
+            style="@style/additem"
+            android:src="@mipmap/img" />
+
+        <ImageView
+            android:id="@+id/iv_additem_video"
+            style="@style/additem"
+            android:src="@mipmap/video" />
+    </LinearLayout>
+</LinearLayout>
