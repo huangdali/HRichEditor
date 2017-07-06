@@ -24,7 +24,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.github.valuesfeng:androidpicturepicker:1.0.0'//图片多选
-    compile 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.0'
+    compile 'com.github.LuckSiege.PictureSelector:picture_library:v1.2.5'//视频多选
     testCompile 'junit:junit:4.12'
     compile 'com.github.zhaokaiqiang.klog:library:0.0.1'
 }

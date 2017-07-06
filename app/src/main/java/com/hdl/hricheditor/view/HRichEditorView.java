@@ -3,7 +3,6 @@ package com.hdl.hricheditor.view;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.DashPathEffect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +39,7 @@ import io.valuesfeng.picker.engine.GlideEngine;
 import io.valuesfeng.picker.utils.PicturePickerUtils;
 
 import static com.luck.picture.lib.model.FunctionConfig.MODE_MULTIPLE;
+
 
 public class HRichEditorView extends AppCompatActivity {
     /**
@@ -83,6 +83,7 @@ public class HRichEditorView extends AppCompatActivity {
             datas.get(adapter.getCurClickItemIndex()).setUrl(resultList.get(0).toString());
             adapter.notifyDataSetChanged();
         }
+        
     };
 
     @Override
