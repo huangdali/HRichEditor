@@ -10,6 +10,7 @@ import android.widget.RadioButton;
 import com.hdl.hricheditor.R;
 
 /**
+ * 自定义单选框，只用传入选中和不选中两个图片即可
  * Created by HDL on 2017/2/18.
  */
 

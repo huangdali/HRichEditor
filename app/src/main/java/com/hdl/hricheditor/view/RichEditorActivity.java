@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hdl.hricheditor.R;
-import com.hdl.hricheditor.bean.BaseView;
+import com.hdl.hricheditor.base.BaseView;
 import com.hdl.hricheditor.bean.EContent;
 import com.hdl.hricheditor.bean.ItemType;
 import com.hdl.hricheditor.utils.ImageScaleUtils;

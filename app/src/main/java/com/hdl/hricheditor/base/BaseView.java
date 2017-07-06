@@ -1,4 +1,4 @@
-package com.hdl.hricheditor.bean;
+package com.hdl.hricheditor.base;
 
 /**
  * Created by HDL on 2016/9/2.

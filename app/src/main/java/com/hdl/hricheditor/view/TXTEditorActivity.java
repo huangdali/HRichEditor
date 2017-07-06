@@ -15,24 +15,44 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.hdl.hricheditor.R;
+import com.hdl.hricheditor.base.GlobalField;
 import com.hdl.hricheditor.bean.EContent;
+import com.hdl.hricheditor.bean.LinkContent;
 
+/**
+ * 文本编辑activity，HRichEditor核心类
+ */
 public class TXTEditorActivity extends AppCompatActivity {
-    private static final String TAG = "TXTEditorActivity";
-    private MyRadioButton ivFontB, ivFontA, ivFontCenter, ivFontColor;
-    private LinearLayout llFontA, llFontB, llFontCenter, llFontColor;
-    private RadioGroup rgFontB, rgFontA, rgFontColor, rgFontCenter;
-    private LinearLayout llFontArea;
-    private String style = "";
-    private String content = "";
-    private EditText etContent;
-    private MyCheckBox ivFontBorder, ivFontInter, ivFontLine;
-    private boolean isBorder, isInter;
-    private String desc, linked;
-    private TextView tvAddLinked;
-    private EContent eContent;
+    //整形常量区
     private static final int REQUEST_CODE_EDIT_TXT = 1005;//编辑文本
     private static final int REQUEST_CODE_EDIT_LINKED = 2001;//编辑文本
+    //字符常量区
+    private static final String TAG = "TXTEditorActivity";
+
+    private boolean isBold;//是否选中了加粗
+    private boolean isInter;//是否选中了斜体
+
+    private String style = "";
+    private String content = "";
+
+    //                    加粗按钮      字体大小按钮  字体对齐方式    字体颜色
+    private MyRadioButton rbFontBold, rbFontSize, rbFontAlign, rbFontColor;
+    // 字体加粗选项，多选      加粗         斜体          下划线
+    private MyCheckBox cbFontBold, cbFontInter, cbFontLine;
+    //                    字体大小区           加粗区           对齐方式区        颜色区
+    private LinearLayout llFontSizeArea, llFontBoldArea, llFontAlignArea, llFontColorArea;
+    //                    加粗区      字体大小区    颜色区        对齐方式区
+    private RadioGroup rgFontBold, rgFontSize, rgFontColor, rgFontAlign;
+    //底部字体控制栏
+    private LinearLayout llFontControl;
+    //内容区
+    private EditText etContent;
+    //添加链接
+    private TextView tvAddLinked;
+    //内容对象
+    private EContent eContent;
+    //链接对象
+    private LinkContent linkContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +64,39 @@ public class TXTEditorActivity extends AppCompatActivity {
     }
 
     /**
+     * 初始化视图
+     */
+    private void initView() {
+        View view = View.inflate(this, R.layout.activity_txteditor, null);
+        setContentView(view);
+        ((TextView) view.findViewById(R.id.tv_public_title)).setText(getString(R.string.txt_edit_content));
+        tvAddLinked = (TextView) findViewById(R.id.tv_txteditor_addlinked);
+        rbFontSize = (MyRadioButton) findViewById(R.id.iv_font_option_a);
+        rbFontBold = (MyRadioButton) findViewById(R.id.iv_font_option_b);
+        etContent = (EditText) findViewById(R.id.et_txteditor_content);
+        rbFontAlign = (MyRadioButton) findViewById(R.id.iv_font_option_center);
+        rbFontColor = (MyRadioButton) findViewById(R.id.iv_font_option_color);
+        llFontSizeArea = (LinearLayout) findViewById(R.id.ll_font_option_a);
+        llFontBoldArea = (LinearLayout) findViewById(R.id.ll_txteditor_style_area);
+        llFontAlignArea = (LinearLayout) findViewById(R.id.ll_font_option_center);
+        llFontColorArea = (LinearLayout) findViewById(R.id.ll_font_option_color);
+        rgFontSize = (RadioGroup) findViewById(R.id.rg_font_option_a);
+        rgFontBold = (RadioGroup) findViewById(R.id.rg_font_option_b);
+        rgFontColor = (RadioGroup) findViewById(R.id.rg_font_option_color);
+        rgFontAlign = (RadioGroup) findViewById(R.id.rg_font_option_center);
+        llFontControl = (LinearLayout) findViewById(R.id.ll_font_option_area);
+        cbFontBold = (MyCheckBox) findViewById(R.id.mcb_font_option_border);
+        cbFontInter = (MyCheckBox) findViewById(R.id.mcb_font_option_inter);
+        cbFontLine = (MyCheckBox) findViewById(R.id.mcb_font_option_line);
+    }
+
+    /**
      * 回显样式
      */
     private void echoStyle() {
         if (!TextUtils.isEmpty(eContent.getContent())) {
             String content = eContent.getContent();
-            if (content.contains("<br/><a href=")) {
+            if (content.contains("<br/><a href=")) {//回显需要去掉链接
                 content = content.substring(0, content.indexOf("<br/><a href="));
             }
             etContent.setText(content);
@@ -57,73 +104,10 @@ public class TXTEditorActivity extends AppCompatActivity {
         }
         if (!TextUtils.isEmpty(eContent.getStyle())) {
             String style = eContent.getStyle();
-            if (style.contains("font-weight:bold") && style.contains("font-style:italic")) {//加粗和斜体
-                etContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
-                ivFontBorder.setChecked(true);
-                ivFontInter.setChecked(true);
-                isBorder = true;
-                isInter = true;
-            } else if (style.contains("font-weight:bold")) {//只用加粗
-                isBorder = true;
-                etContent.setTypeface(Typeface.DEFAULT_BOLD);
-                ivFontBorder.setChecked(true);
-            } else if (style.contains("font-style:italic")) {//只用斜体
-                isInter = true;
-                ivFontInter.setChecked(true);
-                etContent.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
-            }
-            if (style.contains("text-decoration:underline")) {
-                ivFontLine.setChecked(true);
-                etContent.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-            }
-            if (style.contains("text-align:center")) {
-                etContent.setGravity(Gravity.CENTER_HORIZONTAL);
-                rgFontCenter.check(R.id.mrb_font_option_center);
-            } else if (style.contains("text-align:right")) {
-                etContent.setGravity(Gravity.RIGHT);
-                rgFontCenter.check(R.id.mrb_font_option_right);
-            } else {
-                rgFontCenter.check(R.id.mrb_font_option_left);
-                etContent.setGravity(Gravity.LEFT);
-            }
-            if (style.contains("font-size:18px")) {
-                etContent.setTextSize(18);
-                rgFontA.check(R.id.mrb_font_option_add);
-            } else if (style.contains("font-size:14px")) {
-                etContent.setTextSize(14);
-                rgFontA.check(R.id.mrb_font_option_sub);
-            } else {
-                etContent.setTextSize(16);
-                rgFontA.check(R.id.mrb_font_option_normal);
-            }
-            if (style.contains("color:#a9b7b7")) {
-                etContent.setTextColor(0xffa9b7b7);
-                rgFontColor.check(R.id.mrb_font_option_gray);
-            } else if (style.contains("color:#33475f")) {
-                etContent.setTextColor(0xff33475f);
-                rgFontColor.check(R.id.mrb_font_option_blackgray);
-            } else if (style.contains("color:#ecf0f1")) {
-                etContent.setTextColor(0xffecf0f1);
-                rgFontColor.check(R.id.mrb_font_option_whete);
-            } else if (style.contains("color:#56abe4")) {
-                etContent.setTextColor(0xff56abe4);
-                rgFontColor.check(R.id.mrb_font_option_blue);
-            } else if (style.contains("color:#11cd6e")) {
-                etContent.setTextColor(0xff11cd6e);
-                rgFontColor.check(R.id.mrb_font_option_green);
-            } else if (style.contains("color:#f4c600")) {
-                etContent.setTextColor(0xfff4c600);
-                rgFontColor.check(R.id.mrb_font_option_yellow);
-            } else if (style.contains("color:#9d55b8")) {
-                etContent.setTextColor(0xff9d55b8);
-                rgFontColor.check(R.id.mrb_font_option_violet);
-            } else if (style.contains("color:#eb4f38")) {
-                etContent.setTextColor(0xffeb4f38);
-                rgFontColor.check(R.id.mrb_font_option_red);
-            } else {
-                etContent.setTextColor(0xff272636);
-                rgFontColor.check(R.id.mrb_font_option_black);
-            }
+            setFontBold(style);//回显字体加粗方式
+            setFontAlign(style);//回显字体对齐方式
+            setFontSize(style);//回显字体大小
+            setFontColor(style);//回显字体颜色
         }
 
     }
@@ -144,29 +128,6 @@ public class TXTEditorActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private void initView() {
-        View view = View.inflate(this, R.layout.activity_txteditor, null);
-        setContentView(view);
-        ((TextView) view.findViewById(R.id.tv_public_title)).setText("编辑内容");
-        tvAddLinked = (TextView) findViewById(R.id.tv_txteditor_addlinked);
-        ivFontA = (MyRadioButton) findViewById(R.id.iv_font_option_a);
-        ivFontB = (MyRadioButton) findViewById(R.id.iv_font_option_b);
-        etContent = (EditText) findViewById(R.id.et_txteditor_content);
-        ivFontCenter = (MyRadioButton) findViewById(R.id.iv_font_option_center);
-        ivFontColor = (MyRadioButton) findViewById(R.id.iv_font_option_color);
-        llFontA = (LinearLayout) findViewById(R.id.ll_font_option_a);
-        llFontB = (LinearLayout) findViewById(R.id.ll_txteditor_style_area);
-        llFontCenter = (LinearLayout) findViewById(R.id.ll_font_option_center);
-        llFontColor = (LinearLayout) findViewById(R.id.ll_font_option_color);
-        rgFontA = (RadioGroup) findViewById(R.id.rg_font_option_a);
-        rgFontB = (RadioGroup) findViewById(R.id.rg_font_option_b);
-        rgFontColor = (RadioGroup) findViewById(R.id.rg_font_option_color);
-        rgFontCenter = (RadioGroup) findViewById(R.id.rg_font_option_center);
-        llFontArea = (LinearLayout) findViewById(R.id.ll_font_option_area);
-        ivFontBorder = (MyCheckBox) findViewById(R.id.mcb_font_option_border);
-        ivFontInter = (MyCheckBox) findViewById(R.id.mcb_font_option_inter);
-        ivFontLine = (MyCheckBox) findViewById(R.id.mcb_font_option_line);
-    }
 
     /**
      * 获取数据
@@ -175,59 +136,56 @@ public class TXTEditorActivity extends AppCompatActivity {
         style = "";
         content = etContent.getText().toString().trim();
         Log.e(TAG, "getData: " + content);
-        if (!TextUtils.isEmpty(linked)) {
-            content = content + "<br/><a href=\"" + linked + "\">" + desc + "</a><br/>";
+        if (!TextUtils.isEmpty(linkContent.getLink())) {
+            content = content + "<br/><a href=\"" + linkContent.getLink() + "\">" + linkContent.getTitle() + "</a><br/>";
         }
 
-        int checkedId = rgFontA.getCheckedRadioButtonId();
+        int checkedId = rgFontSize.getCheckedRadioButtonId();
         if (checkedId == R.id.mrb_font_option_add) {
-            style += "font-size:18px;";
+            style += GlobalField.FontSize.KEY_SIZE_18;
         } else if (checkedId == R.id.mrb_font_option_normal) {
-            style += "font-size:16px;";
+            style += GlobalField.FontSize.KEY_SIZE_16;
         } else if (checkedId == R.id.mrb_font_option_sub) {
-            style += "font-size:14px;";
+            style += GlobalField.FontSize.KEY_SIZE_14;
         }
-        int checkedIdCetner = rgFontCenter.getCheckedRadioButtonId();
+        int checkedIdCetner = rgFontAlign.getCheckedRadioButtonId();
         if (checkedIdCetner == R.id.mrb_font_option_center) {
-            style += "text-align:center;";
+            style += GlobalField.FontAlign.KEY_ALIGN_CENTER;
         } else if (checkedIdCetner == R.id.mrb_font_option_right) {
-            style += "text-align:right;";
+            style += GlobalField.FontAlign.KEY_ALIGN_RIGHT;
         } else if (checkedIdCetner == R.id.mrb_font_option_left) {
-            style += "text-align:left;";
+            style += GlobalField.FontAlign.KEY_ALIGN_LEFT;
         }
-        if (ivFontBorder.isChecked()) {
-            style += "font-weight:bold;";//加粗
+        if (cbFontBold.isChecked()) {
+            style += GlobalField.FontBold.KEY_STYLE_BOLD;//加粗
         }
-        if (ivFontInter.isChecked()) {
-            style += "font-style:italic;";//斜体
+        if (cbFontInter.isChecked()) {
+            style += GlobalField.FontBold.KEY_STYLE_ITALIC;//斜体
         }
-        if (ivFontLine.isChecked()) {
-            style += "text-decoration:underline;";//下划线
+        if (cbFontLine.isChecked()) {
+            style += GlobalField.FontBold.KEY_STYLE_UNDERLINE;//下划线
         }
         int checkedIdColor = rgFontColor.getCheckedRadioButtonId();
         if (checkedIdColor == R.id.mrb_font_option_black) {
-            style += "color:#272636";
+            style += GlobalField.FontColor.KEY_COLOR_BLACK;
         } else if (checkedIdColor == R.id.mrb_font_option_gray) {
-            style += "color:#a9b7b7";
+            style += GlobalField.FontColor.KEY_COLOR_GRAY;
         } else if (checkedIdColor == R.id.mrb_font_option_blackgray) {
-            style += "color:#33475f";
+            style += GlobalField.FontColor.KEY_COLOR_BLACKGRAY;
         } else if (checkedIdColor == R.id.mrb_font_option_blue) {
-            style += "color:#56abe4";
+            style += GlobalField.FontColor.KEY_COLOR_BLUE;
         } else if (checkedIdColor == R.id.mrb_font_option_green) {
-            style += "color:#11cd6e";
+            style += GlobalField.FontColor.KEY_COLOR_GREEN;
         } else if (checkedIdColor == R.id.mrb_font_option_yellow) {
-            style += "color:#f4c600";
+            style += GlobalField.FontColor.KEY_COLOR_YELLOW;
         } else if (checkedIdColor == R.id.mrb_font_option_violet) {
-            style += "color:#9d55b8";
-        } else if (checkedIdColor == R.id.mrb_font_option_whete) {
-            style += "color:#ecf0f1";
+            style += GlobalField.FontColor.KEY_COLOR_VOILET;
+        } else if (checkedIdColor == R.id.mrb_font_option_white) {
+            style += GlobalField.FontColor.KEY_COLOR_WHITE;
         } else if (checkedIdColor == R.id.mrb_font_option_red) {
-            style += "color:#eb4f38";
+            style += GlobalField.FontColor.KEY_COLOR_RED;
         }
         Log.e(TAG, "getData: " + content + "\n" + style);
-        if (eContent == null) {
-            Log.e(TAG, "getData: 我是空了");
-        }
         eContent.setContent(content);
         eContent.setStyle(style);
     }
@@ -237,13 +195,15 @@ public class TXTEditorActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e(TAG, "startActivityForResult: -----------" + requestCode);
         if (requestCode == REQUEST_CODE_EDIT_LINKED && resultCode == REQUEST_CODE_EDIT_LINKED) {
-            linked = data.getStringExtra("linked");
-            desc = data.getStringExtra("desc");
-            tvAddLinked.setText(desc);
-            Log.e(TAG, "startActivityForResult: " + linked + "\n" + desc);
+            linkContent = (LinkContent) data.getSerializableExtra("linkContent");
+            tvAddLinked.setText(linkContent.getTitle());
+            Log.e(TAG, "startActivityForResult: " + linkContent);
         }
     }
 
+    /**
+     * 设置监听
+     */
     private void setListener() {
 
         tvAddLinked.setOnClickListener(new View.OnClickListener() {
@@ -252,50 +212,50 @@ public class TXTEditorActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(TXTEditorActivity.this, LinkedActivity.class), REQUEST_CODE_EDIT_LINKED);
             }
         });
-        ivFontA.setOnClickListener(new View.OnClickListener() {
+        rbFontSize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llFontA.setVisibility(View.VISIBLE);
-                llFontB.setVisibility(View.GONE);
-                llFontCenter.setVisibility(View.GONE);
-                llFontColor.setVisibility(View.GONE);
+                llFontSizeArea.setVisibility(View.VISIBLE);
+                llFontBoldArea.setVisibility(View.GONE);
+                llFontAlignArea.setVisibility(View.GONE);
+                llFontColorArea.setVisibility(View.GONE);
             }
         });
-        ivFontB.setOnClickListener(new View.OnClickListener() {
+        rbFontBold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llFontA.setVisibility(View.GONE);
-                llFontB.setVisibility(View.VISIBLE);
-                llFontCenter.setVisibility(View.GONE);
-                llFontColor.setVisibility(View.GONE);
+                llFontSizeArea.setVisibility(View.GONE);
+                llFontBoldArea.setVisibility(View.VISIBLE);
+                llFontAlignArea.setVisibility(View.GONE);
+                llFontColorArea.setVisibility(View.GONE);
             }
         });
-        ivFontCenter.setOnClickListener(new View.OnClickListener() {
+        rbFontAlign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llFontA.setVisibility(View.GONE);
-                llFontB.setVisibility(View.GONE);
-                llFontCenter.setVisibility(View.VISIBLE);
-                llFontColor.setVisibility(View.GONE);
+                llFontSizeArea.setVisibility(View.GONE);
+                llFontBoldArea.setVisibility(View.GONE);
+                llFontAlignArea.setVisibility(View.VISIBLE);
+                llFontColorArea.setVisibility(View.GONE);
             }
         });
-        ivFontColor.setOnClickListener(new View.OnClickListener() {
+        rbFontColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                llFontA.setVisibility(View.GONE);
-                llFontB.setVisibility(View.GONE);
-                llFontCenter.setVisibility(View.GONE);
-                llFontColor.setVisibility(View.VISIBLE);
+                llFontSizeArea.setVisibility(View.GONE);
+                llFontBoldArea.setVisibility(View.GONE);
+                llFontAlignArea.setVisibility(View.GONE);
+                llFontColorArea.setVisibility(View.VISIBLE);
             }
         });
-        llFontArea.setOnClickListener(new View.OnClickListener() {
+        llFontControl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rgFontB.clearCheck();
-                llFontA.setVisibility(View.GONE);
-                llFontB.setVisibility(View.GONE);
-                llFontCenter.setVisibility(View.GONE);
-                llFontColor.setVisibility(View.GONE);
+                rgFontBold.clearCheck();
+                llFontSizeArea.setVisibility(View.GONE);
+                llFontBoldArea.setVisibility(View.GONE);
+                llFontAlignArea.setVisibility(View.GONE);
+                llFontColorArea.setVisibility(View.GONE);
             }
         });
 //
@@ -305,6 +265,9 @@ public class TXTEditorActivity extends AppCompatActivity {
         setTextColorListener();
     }
 
+    /**
+     * 设置字体颜色选择监听
+     */
     private void setTextColorListener() {
         findViewById(R.id.mrb_font_option_black).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -348,7 +311,7 @@ public class TXTEditorActivity extends AppCompatActivity {
                 etContent.setTextColor(0xff9d55b8);
             }
         });
-        findViewById(R.id.mrb_font_option_whete).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.mrb_font_option_white).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 etContent.setTextColor(0xffecf0f1);
@@ -393,7 +356,7 @@ public class TXTEditorActivity extends AppCompatActivity {
         findViewById(R.id.mcb_font_option_border).setOnClickListener(new View.OnClickListener() {//加粗
             @Override
             public void onClick(View v) {
-                isBorder = !isBorder;
+                isBold = !isBold;
                 if (((MyCheckBox) v).isChecked()) {
                     if (isInter) {
                         etContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
@@ -414,13 +377,13 @@ public class TXTEditorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 isInter = !isInter;
                 if (((MyCheckBox) v).isChecked()) {
-                    if (isBorder) {
+                    if (isBold) {
                         etContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
                     } else {
                         etContent.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
                     }
                 } else {
-                    if (isBorder) {
+                    if (isBold) {
                         etContent.setTypeface(Typeface.DEFAULT_BOLD);
                     } else {
                         etContent.setTypeface(Typeface.DEFAULT);
@@ -482,6 +445,106 @@ public class TXTEditorActivity extends AppCompatActivity {
      */
     public void onBack(View view) {
         this.finish();
+    }
+
+    /**
+     * 回显字体加粗方式
+     *
+     * @param style
+     */
+    private void setFontBold(String style) {
+        if (style.contains(GlobalField.FontBold.KEY_STYLE_BOLD) && style.contains(GlobalField.FontBold.KEY_STYLE_ITALIC)) {//加粗和斜体
+            etContent.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD_ITALIC));
+            cbFontBold.setChecked(true);
+            cbFontInter.setChecked(true);
+            isBold = true;
+            isInter = true;
+        } else if (style.contains(GlobalField.FontBold.KEY_STYLE_BOLD)) {//只用加粗
+            isBold = true;
+            etContent.setTypeface(Typeface.DEFAULT_BOLD);
+            cbFontBold.setChecked(true);
+        } else if (style.contains(GlobalField.FontBold.KEY_STYLE_ITALIC)) {//只用斜体
+            isInter = true;
+            cbFontInter.setChecked(true);
+            etContent.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
+        }
+
+        if (style.contains(GlobalField.FontBold.KEY_STYLE_UNDERLINE)) {
+            cbFontLine.setChecked(true);
+            etContent.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        }
+    }
+
+    /**
+     * 回显字体对齐方式
+     *
+     * @param style
+     */
+    private void setFontAlign(String style) {
+        if (style.contains(GlobalField.FontAlign.KEY_ALIGN_CENTER)) {
+            etContent.setGravity(Gravity.CENTER_HORIZONTAL);
+            rgFontAlign.check(R.id.mrb_font_option_center);
+        } else if (style.contains(GlobalField.FontAlign.KEY_ALIGN_RIGHT)) {
+            etContent.setGravity(Gravity.RIGHT);
+            rgFontAlign.check(R.id.mrb_font_option_right);
+        } else {
+            rgFontAlign.check(R.id.mrb_font_option_left);
+            etContent.setGravity(Gravity.LEFT);
+        }
+    }
+
+    /**
+     * 回显字体大小
+     *
+     * @param style
+     */
+    private void setFontSize(String style) {
+        if (style.contains(GlobalField.FontSize.KEY_SIZE_18)) {
+            etContent.setTextSize(GlobalField.FontSize.SIZE_18);
+            rgFontSize.check(R.id.mrb_font_option_add);
+        } else if (style.contains(GlobalField.FontSize.KEY_SIZE_14)) {
+            etContent.setTextSize(GlobalField.FontSize.SIZE_14);
+            rgFontSize.check(R.id.mrb_font_option_sub);
+        } else {
+            etContent.setTextSize(GlobalField.FontSize.SIZE_16);
+            rgFontSize.check(R.id.mrb_font_option_normal);
+        }
+    }
+
+    /**
+     * 回显字体颜色
+     *
+     * @param style
+     */
+    private void setFontColor(String style) {
+        if (style.contains(GlobalField.FontColor.KEY_COLOR_GRAY)) {//灰色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_GRAY);
+            rgFontColor.check(R.id.mrb_font_option_gray);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_BLACKGRAY)) {//深蓝色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_BLACKGRAY);
+            rgFontColor.check(R.id.mrb_font_option_blackgray);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_WHITE)) {//白色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_WHITE);
+            rgFontColor.check(R.id.mrb_font_option_white);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_BLUE)) {//蓝色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_BLUE);
+            rgFontColor.check(R.id.mrb_font_option_blue);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_GREEN)) {//绿色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_GREEN);
+            rgFontColor.check(R.id.mrb_font_option_green);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_YELLOW)) {//黄色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_YELLOW);
+            rgFontColor.check(R.id.mrb_font_option_yellow);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_VOILET)) {//紫色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_VOILET);
+            rgFontColor.check(R.id.mrb_font_option_violet);
+        } else if (style.contains(GlobalField.FontColor.KEY_COLOR_RED)) {//红色
+            etContent.setTextColor(GlobalField.FontColor.COLOR_RED);
+            rgFontColor.check(R.id.mrb_font_option_red);
+        } else {
+            etContent.setTextColor(GlobalField.FontColor.COLOR_BLACK);
+            rgFontColor.check(R.id.mrb_font_option_black);//黑色
+        }
     }
 
 }

@@ -7,7 +7,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.hdl.hricheditor.R;
+
 /**
+ * 自定义CheckBox多选框，只用传入选中和不选中两个图片即可
  * Created by HDL on 2017/2/18.
  */
 

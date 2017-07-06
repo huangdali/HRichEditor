@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hdl.hricheditor.R;
+import com.hdl.hricheditor.bean.LinkContent;
 
 
 public class LinkedActivity extends AppCompatActivity {
@@ -30,8 +31,11 @@ public class LinkedActivity extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra("linked", etLinked.getText().toString());
-        intent.putExtra("desc", TextUtils.isEmpty(etDesc.getText().toString()) ? "网页链接" : etDesc.getText().toString());
+        LinkContent linkContent = new LinkContent();
+        intent.putExtra("linkContent", linkContent);
+        linkContent.setLink(TextUtils.isEmpty(etDesc.getText().toString()) ? "网页链接" : etDesc.getText().toString());
+        linkContent.setLink(etLinked.getText().toString());
+
         this.setResult(REQUEST_CODE_EDIT_LINKED, intent);
         finish();
     }

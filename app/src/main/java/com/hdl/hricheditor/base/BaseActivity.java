@@ -1,4 +1,4 @@
-package com.hdl.hricheditor.bean;
+package com.hdl.hricheditor.base;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
