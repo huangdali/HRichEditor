@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">HRichEdtor</string>
+    <string name="txt_not_out_5000words">不能超过5000字</string>
+    <string name="txt_click_btn_add_link">点击添加链接</string>
+    <string name="txt_edit_content">编辑内容</string>
+    <string name="link_address">链接地址</string>
+    <string name="link_add">添加链接</string>
+    <string name="link_address_hint">http://</string>
+    <string name="link_desc">链接描述</string>
+    <string name="link_desc_hint">连接标题</string>
+    <string name="link_ok">确定</string>
+    <string name="link_copyright">请勿发布非法链接，后果自负</string>
+    <string name="link_dont_null">链接不能为空</string>
+    <string name="rich_click_add_txt">点击添加文字内容</string>
 </resources>

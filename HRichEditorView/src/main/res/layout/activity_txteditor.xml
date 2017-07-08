@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/mcc_public_title" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_txteditor"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#fff">
+
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffffff"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingBottom="2.0dip">
+
+                <LinearLayout
+                    android:id="@+id/ll_txteditor_style_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="80.0dip"
+                    android:background="@drawable/shape_fontoption_border"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:visibility="gone">
+
+                    <com.hdl.view.MyCheckBox
+                        android:id="@+id/mcb_font_option_border"
+                        style="@style/fontchange"
+                        app:checkedResId="@mipmap/font_border_selectedn"
+                        app:unCheckedResId="@mipmap/font_border" />
+
+                    <com.hdl.view.MyCheckBox
+                        android:id="@+id/mcb_font_option_inter"
+                        style="@style/fontchange"
+                        app:checkedResId="@mipmap/font_inter_selected"
+                        app:unCheckedResId="@mipmap/font_inter" />
+
+                    <com.hdl.view.MyCheckBox
+                        android:id="@+id/mcb_font_option_line"
+                        style="@style/fontchange"
+                        app:checkedResId="@mipmap/font_line_selected"
+                        app:unCheckedResId="@mipmap/font_line" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_font_option_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="40.0dip"
+                    android:background="@drawable/shape_fontoption_border"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/rg_font_option_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_add"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_add_selected"
+                            app:unCheckedResId="@mipmap/font_add" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_normal"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_selected"
+                            app:unCheckedResId="@mipmap/font_unselected" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_sub"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_sub_selected"
+                            app:unCheckedResId="@mipmap/font_sub" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_font_option_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_fontoption_border"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/rg_font_option_center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_left"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_left_selected"
+                            app:unCheckedResId="@mipmap/font_left" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_center"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_center_selected"
+                            app:unCheckedResId="@mipmap/font_center" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_right"
+                            style="@style/fontchange"
+                            app:checkedResId="@mipmap/font_right_selected"
+                            app:unCheckedResId="@mipmap/font_right" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_font_option_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_fontoption_border"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:padding="5.0dip"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/rg_font_option_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_black"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_black_selected"
+                            app:unCheckedResId="@mipmap/font_color_black" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_gray"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_gray_selected"
+                            app:unCheckedResId="@mipmap/font_color_gray" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_white"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_whete_selected"
+                            app:unCheckedResId="@mipmap/font_color_whete" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_blackgray"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_blackgray_selected"
+                            app:unCheckedResId="@mipmap/font_color_blackgray" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_blue"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_blue_selected"
+                            app:unCheckedResId="@mipmap/font_color_blue" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_green"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_green_selected"
+                            app:unCheckedResId="@mipmap/font_color_green" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_red"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_red_selected"
+                            app:unCheckedResId="@mipmap/font_color_red" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_violet"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_violet_selected"
+                            app:unCheckedResId="@mipmap/font_color_violet" />
+
+                        <com.hdl.view.MyRadioButton
+                            android:id="@+id/mrb_font_option_yellow"
+                            style="@style/fontcolor"
+                            app:checkedResId="@mipmap/font_color_yellow_selected"
+                            app:unCheckedResId="@mipmap/font_color_yellow" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="1.0dip"
+                android:background="#11000000" />
+
+            <LinearLayout
+                android:id="@+id/ll_font_option_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff1efef"
+                android:orientation="horizontal"
+                android:paddingBottom="10.0dip"
+                android:paddingTop="10.0dip">
+
+                <TextView
+                    android:id="@+id/tv_txteditor_addlinked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3.0dip"
+                    android:background="@drawable/shape_linked"
+                    android:drawableLeft="@mipmap/linked_txt"
+                    android:drawablePadding="5.0dip"
+                    android:ellipsize="end"
+                    android:maxLength="6"
+                    android:paddingBottom="2.0dip"
+                    android:paddingLeft="5.0dip"
+                    android:paddingRight="10.0dip"
+                    android:paddingTop="2.0dip"
+                    android:text="@string/txt_click_btn_add_link"
+                    android:textColor="#ffffffff" />
+
+                <RadioGroup
+                    android:id="@+id/rg_font_option_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <com.hdl.view.MyRadioButton
+                        android:id="@+id/iv_font_option_b"
+                        style="@style/fontoption"
+                        app:checkedResId="@mipmap/font_border_selectedn"
+                        app:unCheckedResId="@mipmap/font_border" />
+
+                    <com.hdl.view.MyRadioButton
+                        android:id="@+id/iv_font_option_a"
+                        style="@style/fontoption"
+                        app:checkedResId="@mipmap/font_selected"
+                        app:unCheckedResId="@mipmap/font_unselected" />
+
+                    <com.hdl.view.MyRadioButton
+                        android:id="@+id/iv_font_option_center"
+                        style="@style/fontoption"
+                        app:checkedResId="@mipmap/font_center_selected"
+                        app:unCheckedResId="@mipmap/font_center" />
+
+                    <com.hdl.view.MyRadioButton
+                        android:id="@+id/iv_font_option_color"
+                        style="@style/fontoption"
+                        app:checkedResId="@mipmap/font_color_selected"
+                        app:unCheckedResId="@mipmap/font_color" />
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/ll"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_txteditor_content"
+                    style="?android:attr/textViewStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/shape_item_bg"
+                    android:gravity="start"
+                    android:hint="@string/txt_not_out_5000words"
+                    android:maxLength="5000"
+                    android:padding="5dp"
+                    android:textColorHint="#ffc6c1c1"
+                    android:textSize="16.0sp" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</LinearLayout>
