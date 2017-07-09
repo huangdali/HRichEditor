@@ -1,4 +1,4 @@
-package com.hdl.base;
+package com.huangdali.base;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

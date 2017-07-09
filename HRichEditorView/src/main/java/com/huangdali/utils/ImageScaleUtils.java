@@ -1,4 +1,4 @@
-package com.hdl.utils;
+package com.huangdali.utils;
 
 import android.content.ContentUris;
 import android.content.Context;

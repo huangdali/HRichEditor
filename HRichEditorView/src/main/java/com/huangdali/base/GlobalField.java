@@ -1,4 +1,4 @@
-package com.hdl.base;
+package com.huangdali.base;
 
 /**
  * 全局字段类
@@ -59,8 +59,11 @@ public class GlobalField {
      * 字体对齐方式
      */
     public class FontAlign {
+        //左边对齐
         public static final String KEY_ALIGN_LEFT = "text-align:left";
+        //居中对齐
         public static final String KEY_ALIGN_CENTER = "text-align:center";
+        //居右对齐
         public static final String KEY_ALIGN_RIGHT = "text-align:right";
     }
 
@@ -68,8 +71,11 @@ public class GlobalField {
      * 字体加粗方式
      */
     public class FontBold {
+        //加粗
         public static final String KEY_STYLE_BOLD = "font-weight:bold";
+        //斜体
         public static final String KEY_STYLE_ITALIC = "font-style:italic";
+        //下划线
         public static final String KEY_STYLE_UNDERLINE = "text-decoration:underline";
     }
 

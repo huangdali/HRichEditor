@@ -1,4 +1,4 @@
-package com.hdl.bean;
+package com.huangdali.bean;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,9 +16,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.hdl.R;
-import com.hdl.utils.ItemTouchHelperAdapter;
-import com.hdl.view.TXTEditorActivity;
+import com.hdl.hricheditorview.R;
+import com.huangdali.utils.ItemTouchHelperAdapter;
+import com.huangdali.view.TXTEditorActivity;
 
 import java.util.Collections;
 import java.util.List;

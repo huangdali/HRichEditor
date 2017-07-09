@@ -1,4 +1,4 @@
-package com.hdl.view;
+package com.huangdali.view;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -17,13 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.hdl.R;
-import com.hdl.bean.EContent;
-import com.hdl.bean.ItemType;
-import com.hdl.bean.RichEditorAdapter;
-import com.hdl.runtimepermissions.PermissionsManager;
-import com.hdl.runtimepermissions.PermissionsResultAction;
-import com.hdl.utils.SimpleItemTouchHelperCallback;
+import com.hdl.hricheditorview.R;
+import com.huangdali.bean.EContent;
+import com.huangdali.bean.ItemType;
+import com.huangdali.bean.RichEditorAdapter;
+import com.huangdali.runtimepermissions.PermissionsManager;
+import com.huangdali.runtimepermissions.PermissionsResultAction;
+import com.huangdali.utils.SimpleItemTouchHelperCallback;
 import com.luck.picture.lib.model.FunctionConfig;
 import com.luck.picture.lib.model.LocalMediaLoader;
 import com.luck.picture.lib.model.PictureConfig;

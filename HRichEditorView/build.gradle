@@ -19,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    resourcePrefix 'com.hdl.richeditorview'
 }
 
 dependencies {

@@ -1,4 +1,4 @@
-package com.hdl.base;
+package com.huangdali.base;
 
 /**
  * Created by HDL on 2016/9/2.

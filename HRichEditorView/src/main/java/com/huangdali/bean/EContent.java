@@ -1,4 +1,4 @@
-package com.hdl.bean;
+package com.huangdali.bean;
 
 import android.text.TextUtils;
 

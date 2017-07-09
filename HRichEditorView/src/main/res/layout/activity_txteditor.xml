@@ -41,19 +41,19 @@
                     android:padding="5.0dip"
                     android:visibility="gone">
 
-                    <com.hdl.view.MyCheckBox
+                    <com.huangdali.custom.MyCheckBox
                         android:id="@+id/mcb_font_option_border"
                         style="@style/fontchange"
                         app:checkedResId="@mipmap/font_border_selectedn"
                         app:unCheckedResId="@mipmap/font_border" />
 
-                    <com.hdl.view.MyCheckBox
+                    <com.huangdali.custom.MyCheckBox
                         android:id="@+id/mcb_font_option_inter"
                         style="@style/fontchange"
                         app:checkedResId="@mipmap/font_inter_selected"
                         app:unCheckedResId="@mipmap/font_inter" />
 
-                    <com.hdl.view.MyCheckBox
+                    <com.huangdali.custom.MyCheckBox
                         android:id="@+id/mcb_font_option_line"
                         style="@style/fontchange"
                         app:checkedResId="@mipmap/font_line_selected"
@@ -77,19 +77,19 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_add"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_add_selected"
                             app:unCheckedResId="@mipmap/font_add" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_normal"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_selected"
                             app:unCheckedResId="@mipmap/font_unselected" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_sub"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_sub_selected"
@@ -113,19 +113,19 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_left"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_left_selected"
                             app:unCheckedResId="@mipmap/font_left" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_center"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_center_selected"
                             app:unCheckedResId="@mipmap/font_center" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_right"
                             style="@style/fontchange"
                             app:checkedResId="@mipmap/font_right_selected"
@@ -149,55 +149,55 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_black"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_black_selected"
                             app:unCheckedResId="@mipmap/font_color_black" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_gray"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_gray_selected"
                             app:unCheckedResId="@mipmap/font_color_gray" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_white"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_whete_selected"
                             app:unCheckedResId="@mipmap/font_color_whete" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_blackgray"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_blackgray_selected"
                             app:unCheckedResId="@mipmap/font_color_blackgray" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_blue"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_blue_selected"
                             app:unCheckedResId="@mipmap/font_color_blue" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_green"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_green_selected"
                             app:unCheckedResId="@mipmap/font_color_green" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_red"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_red_selected"
                             app:unCheckedResId="@mipmap/font_color_red" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_violet"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_violet_selected"
                             app:unCheckedResId="@mipmap/font_color_violet" />
 
-                        <com.hdl.view.MyRadioButton
+                        <com.huangdali.custom.MyRadioButton
                             android:id="@+id/mrb_font_option_yellow"
                             style="@style/fontcolor"
                             app:checkedResId="@mipmap/font_color_yellow_selected"
@@ -245,25 +245,25 @@
                     android:gravity="right"
                     android:orientation="horizontal">
 
-                    <com.hdl.view.MyRadioButton
+                    <com.huangdali.custom.MyRadioButton
                         android:id="@+id/iv_font_option_b"
                         style="@style/fontoption"
                         app:checkedResId="@mipmap/font_border_selectedn"
                         app:unCheckedResId="@mipmap/font_border" />
 
-                    <com.hdl.view.MyRadioButton
+                    <com.huangdali.custom.MyRadioButton
                         android:id="@+id/iv_font_option_a"
                         style="@style/fontoption"
                         app:checkedResId="@mipmap/font_selected"
                         app:unCheckedResId="@mipmap/font_unselected" />
 
-                    <com.hdl.view.MyRadioButton
+                    <com.huangdali.custom.MyRadioButton
                         android:id="@+id/iv_font_option_center"
                         style="@style/fontoption"
                         app:checkedResId="@mipmap/font_center_selected"
                         app:unCheckedResId="@mipmap/font_center" />
 
-                    <com.hdl.view.MyRadioButton
+                    <com.huangdali.custom.MyRadioButton
                         android:id="@+id/iv_font_option_color"
                         style="@style/fontoption"
                         app:checkedResId="@mipmap/font_color_selected"

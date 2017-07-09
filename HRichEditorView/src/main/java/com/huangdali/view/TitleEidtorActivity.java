@@ -1,4 +1,4 @@
-package com.hdl.view;
+package com.huangdali.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,9 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.hdl.R;
+import com.hdl.hricheditorview.R;
+import com.huangdali.utils.CToast;
 
 
 /**
@@ -25,7 +25,7 @@ public class TitleEidtorActivity extends Activity {
         super.onCreate(savedInstanceState);
         View view = View.inflate(this, R.layout.activity_title_eidtor, null);
         setContentView(view);
-        ((TextView) view.findViewById(R.id.tv_public_title)).setText("编辑标题");
+        ((TextView) view.findViewById(R.id.tv_public_title)).setText(getString(R.string.title_edit_title));
         etTitle = (EditText) findViewById(R.id.et_titleeditor_title);
         title = getIntent().getStringExtra("title");
         if (!TextUtils.isEmpty(title)) {
@@ -37,7 +37,7 @@ public class TitleEidtorActivity extends Activity {
 
     public void onSubmit(View view) {
         if (TextUtils.isEmpty(etTitle.getText().toString().trim())) {
-            Toast.makeText(this, "标题不能为空", Toast.LENGTH_SHORT).show();
+            CToast.show(this, getString(R.string.title_dont_null));
             return;
         }
         Intent data = new Intent();
@@ -45,6 +45,7 @@ public class TitleEidtorActivity extends Activity {
         this.setResult(REQUEST_CODE_SET_TITLE, data);
         finish();
     }
+
     public void onBack(View view) {
         this.finish();
     }

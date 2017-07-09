@@ -1,4 +1,4 @@
-package com.hdl.bean;
+package com.huangdali.bean;
 
 /**
  * Created by HDL on 2017/2/18.

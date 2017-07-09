@@ -3,6 +3,7 @@
     package="com.hdl.hricheditor">
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,10 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hdl.view.HRichEditorView" />
-        <activity android:name="com.hdl.view.TitleEidtorActivity" />
-        <activity android:name="com.hdl.view.TXTEditorActivity" />
-        <activity android:name="com.hdl.view.LinkedActivity" />
+
     </application>
 
 </manifest>

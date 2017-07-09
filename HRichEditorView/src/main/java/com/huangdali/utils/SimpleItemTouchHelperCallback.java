@@ -1,9 +1,9 @@
-package com.hdl.utils;
+package com.huangdali.utils;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.hdl.bean.RichEditorAdapter;
+import com.huangdali.bean.RichEditorAdapter;
 
 /**
  * Created by HDL on 2017/3/17.

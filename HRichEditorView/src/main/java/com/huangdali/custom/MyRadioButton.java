@@ -1,33 +1,34 @@
-package com.hdl.view;
+package com.huangdali.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.widget.CheckBox;
+import android.util.Log;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
-import com.hdl.R;
+import com.hdl.hricheditorview.R;
 
 
 /**
- * 自定义CheckBox多选框，只用传入选中和不选中两个图片即可
+ * 自定义单选框，只用传入选中和不选中两个图片即可
  * Created by HDL on 2017/2/18.
  */
 
-public class MyCheckBox extends CheckBox {
+public class MyRadioButton extends RadioButton {
     private static final String TAG = "MyCheckBox";
     private int unCheckedResId;
     private int checkedResId;
 
-    public MyCheckBox(Context context) {
+    public MyRadioButton(Context context) {
         this(context, null);
     }
 
-    public MyCheckBox(Context context, AttributeSet attrs) {
+    public MyRadioButton(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public MyCheckBox(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyRadioButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.MyRadioButton, defStyleAttr, 0);
         unCheckedResId = ta.getResourceId(R.styleable.MyRadioButton_unCheckedResId, 0);
@@ -37,6 +38,7 @@ public class MyCheckBox extends CheckBox {
         this.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.e(TAG, "onCheckedChanged: " + isChecked);
                 updateView();
             }
         });
@@ -56,6 +58,4 @@ public class MyCheckBox extends CheckBox {
         this.checkedResId = checkedResId;
         updateView();
     }
-
-
 }

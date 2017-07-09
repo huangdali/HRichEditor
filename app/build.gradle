@@ -24,5 +24,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.+'
     testCompile 'junit:junit:4.12'
     compile 'com.hdl:elog:v2.0.2'
+    compile 'com.jwkj:CrashExceptioner:v2.0.3'
     compile project(path: ':HRichEditorView')
 }

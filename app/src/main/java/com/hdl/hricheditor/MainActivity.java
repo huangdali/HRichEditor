@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.hdl.view.HRichEditorView;
+import com.huangdali.view.HRichEditorView;
 
 public class MainActivity extends AppCompatActivity {
 

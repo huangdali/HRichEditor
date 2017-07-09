@@ -1,4 +1,4 @@
-package com.hdl.view;
+package com.huangdali.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hdl.R;
-import com.hdl.bean.LinkContent;
+import com.hdl.hricheditorview.R;
+import com.huangdali.bean.LinkContent;
 
 
 public class LinkedActivity extends Activity {

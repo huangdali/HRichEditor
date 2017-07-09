@@ -1,4 +1,4 @@
-package com.hdl.view;
+package com.huangdali.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,10 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.hdl.R;
-import com.hdl.base.GlobalField;
-import com.hdl.bean.EContent;
-import com.hdl.bean.LinkContent;
+import com.hdl.hricheditorview.R;
+import com.huangdali.base.GlobalField;
+import com.huangdali.bean.EContent;
+import com.huangdali.bean.LinkContent;
+import com.huangdali.custom.MyCheckBox;
+import com.huangdali.custom.MyRadioButton;
 
 /**
  * 文本编辑activity，HRichEditor核心类
