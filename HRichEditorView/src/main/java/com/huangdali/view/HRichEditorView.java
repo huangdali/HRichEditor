@@ -11,18 +11,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.hdl.hricheditorview.R;
+import com.huangdali.base.EditorResultBean;
 import com.huangdali.bean.EContent;
 import com.huangdali.bean.ItemType;
 import com.huangdali.bean.RichEditorAdapter;
-import com.huangdali.runtimepermissions.PermissionsManager;
-import com.huangdali.runtimepermissions.PermissionsResultAction;
 import com.huangdali.utils.SimpleItemTouchHelperCallback;
 import com.luck.picture.lib.model.FunctionConfig;
 import com.luck.picture.lib.model.LocalMediaLoader;
@@ -69,36 +68,39 @@ public class HRichEditorView extends Activity {
      * 数据区
      */
     private List<EContent> datas;
-    private Uri bgUri;
-    private boolean isGrantedPermissions = false;
+    private Uri bgUri;//背景图片的uri
 
     /**
      * 视频回调方法
      */
-
-    private PictureConfig.OnSelectResultCallback resultCallback = new PictureConfig.OnSelectResultCallback() {
+    private PictureConfig.OnSelectResultCallback videoResultCallback = new PictureConfig.OnSelectResultCallback() {
         @Override
         public void onSelectSuccess(List<LocalMedia> resultList) {
             datas.get(adapter.getCurClickItemIndex()).setUrl(resultList.get(0).toString());
             adapter.notifyDataSetChanged();
         }
-        
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_richeditor);
-        requestPermission();
         initView();
         defaultChoiceIMG();
     }
 
     public void onSubmit(View view) {
+        EditorResultBean resultBean = new EditorResultBean();
+        resultBean.setContents(datas);
         String html = "";
         for (EContent data : datas) {
             html += data.getHtml();
         }
+        Log.e("mylog", html);
+        Intent intent = getIntent();
+        intent.putExtra("contents", resultBean);
+        this.setResult(Activity.RESULT_OK, intent);
+        this.finish();
     }
 
     /**
@@ -112,24 +114,6 @@ public class HRichEditorView extends Activity {
                 .forResult(REQUEST_CODE_CHOOSE_IMGS);
     }
 
-    /**
-     * android6.0动态权限申请
-     */
-    private void requestPermission() {
-
-        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
-            @Override
-            public void onGranted() {
-                isGrantedPermissions = true;
-            }
-
-            @Override
-            public void onDenied(String permission) {
-                isGrantedPermissions = false;
-                Toast.makeText(HRichEditorView.this, "拒绝权限，部分功能将不能使用哦", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     /**
      * 初始化视图
@@ -287,39 +271,30 @@ public class HRichEditorView extends Activity {
      * @param view
      */
     public void onChangeBG(View view) {
-        if (isGrantedPermissions) {//权限同意了才能拍照
-            Picker.from(this)
-                    .count(1)
-                    .enableCamera(true)
-                    .setEngine(new GlideEngine())
-                    .forResult(REQUEST_CODE_CHOOSE_BG);
-        } else {
-            Toast.makeText(this, "您已经拒绝拍照，请到应用管理中允许本应用拍照的权限", Toast.LENGTH_SHORT).show();
-        }
+        Picker.from(this)
+                .count(1)
+                .enableCamera(true)
+                .setEngine(new GlideEngine())
+                .forResult(REQUEST_CODE_CHOOSE_BG);
     }
 
     /**
      * 获取视频
      */
     private void getVideo() {
-        if (isGrantedPermissions) {
-            FunctionConfig config = new FunctionConfig();
-            config.setType(LocalMediaLoader.TYPE_VIDEO);
-            config.setCompress(true);
-            config.setMaxSelectNum(1);
-            config.setSelectMode(MODE_MULTIPLE);
-            config.setShowCamera(true);
-            config.setEnablePreview(true);
-            config.setPreviewVideo(true);
-            config.setRecordVideoSecond(60 * 60);// 视频秒数
-            config.setCompressFlag(1);
-            config.setCheckNumMode(true);
-            PictureConfig.init(config);
-            PictureConfig.getPictureConfig().openPhoto(this, resultCallback);
-        } else {
-            Toast.makeText(this, "您已经拒绝录像，请到应用管理中允许本应用录像的权限", Toast.LENGTH_SHORT).show();
-        }
-
+        FunctionConfig config = new FunctionConfig();
+        config.setType(LocalMediaLoader.TYPE_VIDEO);
+        config.setCompress(true);
+        config.setMaxSelectNum(1);
+        config.setSelectMode(MODE_MULTIPLE);
+        config.setShowCamera(true);
+        config.setEnablePreview(true);
+        config.setPreviewVideo(true);
+        config.setRecordVideoSecond(60 * 60);// 视频秒数
+        config.setCompressFlag(1);
+        config.setCheckNumMode(true);
+        PictureConfig.init(config);
+        PictureConfig.getPictureConfig().openPhoto(this, videoResultCallback);
     }
 
     public void onBack(View view) {

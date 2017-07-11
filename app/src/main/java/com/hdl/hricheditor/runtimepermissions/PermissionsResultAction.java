@@ -11,7 +11,7 @@
  either express or implied. See the License for the specific language governing
  permissions and limitations under the License.
  */
-package com.huangdali.runtimepermissions;
+package com.hdl.hricheditor.runtimepermissions;
 
 import android.content.pm.PackageManager;
 import android.os.Handler;

@@ -27,7 +27,7 @@ import com.huangdali.custom.MyRadioButton;
 public class TXTEditorActivity extends Activity {
     //整形常量区
     private static final int REQUEST_CODE_EDIT_TXT = 1005;//编辑文本
-    private static final int REQUEST_CODE_EDIT_LINKED = 2001;//编辑文本
+    private static final int REQUEST_CODE_EDIT_LINKED = 2001;//编辑链接
     //字符常量区
     private static final String TAG = "TXTEditorActivity";
 
