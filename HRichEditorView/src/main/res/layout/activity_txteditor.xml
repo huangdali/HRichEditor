@@ -286,7 +286,7 @@
                 <EditText
                     android:id="@+id/et_txteditor_content"
                     style="?android:attr/textViewStyle"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="fill_parent"
                     android:background="@drawable/shape_item_bg"
                     android:gravity="start"
