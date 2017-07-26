@@ -5,11 +5,20 @@ android端富文本编辑器
 
 使用方法见DEMO
 
-> 目前还在积极开发中，大体功能已经实现，期待你的star和fork
+> 完整功能已经实现，期待你的star和fork，有问题可issues
 
 ## 主页
 
-### 效果图
+### 发布效果图
+
+![这里写图片描述](https://github.com/huangdali/HRichEditor/blob/master/images/lizi.png)
+
+更多效果见链接：
+- http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=4ED7874AAF6A2CCCB16562DAA0746F51
+- http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=D914C1CE571229A4DE56218268E7052C
+- http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=EC99B4AAE8D4A593D3B7A97CD579E71B
+
+### 编辑效果图
 
 ![这里写图片描述](https://github.com/huangdali/HRichEditor/blob/master/images/home.png)
 
