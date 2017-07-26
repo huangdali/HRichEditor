@@ -7,7 +7,7 @@ android端富文本编辑器
 
 > 完整功能已经实现，期待你的star和fork，有问题可issues
 
-## 主页
+
 
 ### 发布效果图
 
@@ -17,6 +17,8 @@ android端富文本编辑器
 - http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=4ED7874AAF6A2CCCB16562DAA0746F51
 - http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=D914C1CE571229A4DE56218268E7052C
 - http://g3box.api.g3user.com/G3/videoController/detailedIndex.action?id=EC99B4AAE8D4A593D3B7A97CD579E71B
+
+## 主页
 
 ### 编辑效果图
 
